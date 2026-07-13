@@ -2,17 +2,18 @@ apiVersion: app/v1
 kind: Deployment
 metadata:
   name: myapp
-  spec:
-    replicas: 1
-    selector:
-      matchLabels:
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
         app: myapp
-        template:
-          metadata:
-            labels:
-              app: myapp
-              spec:
-                containers:
-                  -name: myapp
-                  omage: nginxinc/nginx-unprivileged:stable\ports:
-                    -containerPort: 8080
+    spec:
+      containers:
+        -name: myapp
+        image: nginxinc/nginx-unprivileged:stable
+        ports:
+          -containerPort: 8080
